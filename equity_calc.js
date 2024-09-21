@@ -1,4 +1,4 @@
-import { createShowdown } from './shodown.js';
+import { createShowdown } from './showdown.js';
 import { evalHands } from './hand_evaluation.js';
 import { convertHand } from './hand_conversion.js';
 import { convertBoard } from './board_conversion.js';
@@ -14,9 +14,9 @@ export function equity(players, board) {
     let winRate = new Array(players.length);
 
     for (let simulation = 0; simulation < SIMULATION; simulation++) {
-        let shodown = createShowdown(playersHand, boardCards)
+        let showdown = createShowdown(playersHand, boardCards)
 
-        let bestHandIndex = evalHands(playersHand, shodown);
+        let bestHandIndex = evalHands(playersHand, showdown);
 
         win[bestHandIndex]++;
     }
