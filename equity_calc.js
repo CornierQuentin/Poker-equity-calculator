@@ -5,7 +5,7 @@ import { convertBoard } from './board_conversion.js';
 
 export function equity(players, board) {
 
-    let SIMULATION = 10000;
+    let SIMULATION = 100000;
 
     let playersHand = convertHand(players);
     let boardCards = convertBoard(board);
