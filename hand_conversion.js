@@ -25,7 +25,7 @@ export function convertHand(players) {
         d -> 4
     */
 
-    let convertedHands = new Array(players.length);
+    let convertedHand = new Array(players.length);
 
     for (let player = 0; player < players.length; player++) {
         let hand = new Array(2);
@@ -75,8 +75,8 @@ export function convertHand(players) {
             hand[card] = [value, suit];
         }
 
-        convertHand[player] = hand;
+        convertedHand[player] = hand;
     }
 
-    return convertHand;
+    return convertedHand;
 }
