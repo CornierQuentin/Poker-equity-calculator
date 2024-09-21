@@ -18,7 +18,7 @@ export function evalHands(playersHands, showdown) {
     if (maxProperties[1] === 1) {
         return maxProperties[2][0];
     } else {
-        let bestHandQuality = handQuality[maxProperties[0]];
+        let bestHandQuality = maxProperties[0];
 
         return compareHands(handInformation, maxProperties[2], bestHandQuality);
     }
