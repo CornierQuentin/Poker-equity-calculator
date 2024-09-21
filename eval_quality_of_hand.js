@@ -57,7 +57,7 @@ export function qualityOfHand(hand, showdown) {
                 break;
             }
         }
-        if (isAStraight === true) {
+        if (isAStraight) {
             straight = true;
             break;
         }
