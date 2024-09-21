@@ -1,6 +1,6 @@
 export function createShowdown(playersHand, board) {
 
-    let showdown = new Array(5);
+    let showdown = new Array(5).fill(0);
 
     for (let card = 0; card < board.length; card++) {
         showdown[card] = board[card];
@@ -30,7 +30,7 @@ function isCardInShowdown(card, showdown) {
     let isIn = false
 
     for (let cardInShowdonw = 0; cardInShowdonw < showdown.length; cardInShowdonw++) {
-        if (!(showdown[cardInShowdonw] !== null)) {
+        if (showdown[cardInShowdonw] !== 0) {
             if (card[0] == showdown[cardInShowdonw][0] && card[1] == showdown[cardInShowdonw][1]) {
                 isIn = true;
                 break;
@@ -58,5 +58,5 @@ function isCardInPlayersHand(card, playersHand) {
 } 
 
 function randomInt(n) {
-    return Math.floor(Math.random() * n) + 1;
+    return Math.floor(Math.random() * (n - 1)) + 2;
 }
