@@ -7,14 +7,14 @@ export function createShowdown(playersHand, board) {
     }
 
     for (let card = board.length; card < 5; card++) {
-        let value = randomInt(14);
-        let suit = randomInt(4);
+        let value = randomInt(2, 14);
+        let suit = randomInt(1, 4);
 
         let cardNotInplay = !isCardInShowdown([value, suit], showdown) && !isCardInPlayersHand([value, suit], playersHand);
 
         while (!cardNotInplay) {
-            value = randomInt(14);
-            suit = randomInt(4);
+            value = randomInt(2, 14);
+            suit = randomInt(1, 4);
 
             cardNotInplay = !isCardInShowdown([value, suit], showdown) && !isCardInPlayersHand([value, suit], playersHand);
         }
@@ -57,6 +57,6 @@ function isCardInPlayersHand(card, playersHand) {
     return isIn;
 } 
 
-function randomInt(n) {
-    return Math.floor(Math.random() * (n - 1)) + 2;
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
