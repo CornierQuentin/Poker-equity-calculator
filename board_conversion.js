@@ -7,8 +7,7 @@ export function convertBoard(board) {
         "Ac" -> [14, 3]
 
     Liste des équivalences :
-        1 -> 1
-        2 -> 3
+        2 -> 2
         ...
         9 -> 9
         T -> 10
