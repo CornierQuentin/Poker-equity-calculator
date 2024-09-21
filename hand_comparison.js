@@ -9,11 +9,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
                 valueOfCard[player] = handInformation[hands[player]][card];
             }
 
-            console.log(valueOfCard)
-
             let maxProperties = maxOfArray(valueOfCard);
-
-            console.log(maxProperties)
             if (maxProperties[1] === 1) {
                 return hands[maxProperties[2][0]];
             } else {
@@ -36,8 +32,6 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         }
 
         let pairMaxProperties = maxOfArray(valueOfPair);
-
-        console.log(pairMaxProperties)
         if (pairMaxProperties[1] === 1) {
             return hands[pairMaxProperties[2][0]];
         } else {
@@ -55,11 +49,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
                     valueOfCard[player] = handInformation[hands[player]][card];
                 }
     
-                console.log(valueOfCard)
-    
                 let maxProperties = maxOfArray(valueOfCard);
-    
-                console.log(maxProperties)
                 if (maxProperties[1] === 1) {
                     return hands[maxProperties[2][0]];
                 } else {
@@ -224,7 +214,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
             if (maxProperties[1] === 1) {
                 return handToCompare[maxProperties[2][0]];
             } else {
-                return handInformation.length
+                return handInformation.length;
             }
         }
     } else if (bestHandQuality === 8) {
