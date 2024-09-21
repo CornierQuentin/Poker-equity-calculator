@@ -10,8 +10,8 @@ export function equity(players, board) {
     let playersHand = convertHand(players);
     let boardCards = convertBoard(board);
 
-    let win = new Array(players.length).fill(0);
-    let winRate = new Array(players.length);
+    let win = new Array(players.length + 1).fill(0); // le + 1 correspond au nombre de Tie
+    let winRate = new Array(players.length + 1); // le + 1 correspond au pourcentage de Tie
 
     for (let simulation = 0; simulation < SIMULATION; simulation++) {
         let showdown = createShowdown(playersHand, boardCards)
@@ -21,7 +21,7 @@ export function equity(players, board) {
         win[bestHandIndex]++;
     }
 
-    for (let player = 0; player < players.length; player++) {
+    for (let player = 0; player < win.length; player++) {
         winRate[player] = win[player] / SIMULATION;
     }
 

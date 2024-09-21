@@ -27,7 +27,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
             }
         }
 
-        return "Tie";
+        return handInformation.length;
     } else if (bestHandQuality === 2) {
         let hands = handToCompare;
         let valueOfPair = new Array(hands.length).fill(0);
@@ -73,7 +73,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
                 }
             }
 
-            return "Tie"
+            return handInformation.length
         }
     } else if (bestHandQuality === 3) {
         let hands = handToCompare;
@@ -123,7 +123,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
                 if (maxProperties[1] === 1) {
                     return handToCompare[maxProperties[2][0]];
                 } else {
-                    return "Tie"
+                    return handInformation.length
                 }
             }
         }
@@ -167,7 +167,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
                 }
             }
 
-            return "Tie"
+            return handInformation.length
         }
     } else if (bestHandQuality === 5) {
         let valueOfStraight = new Array(handToCompare.length).fill(0);
@@ -180,7 +180,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         if (straightMaxProperties[1] === 1) {
             return handToCompare[straightMaxProperties[2][0]];
         } else {
-            return "Tie"
+            return handInformation.length
         }
     } else if (bestHandQuality === 6) {
         let valueOfFlush = new Array(handToCompare.length).fill(0);
@@ -193,7 +193,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         if (flushMaxProperties[1] === 1) {
             return handToCompare[flushMaxProperties[2][0]];
         } else {
-            return "Tie"
+            return handInformation.length
         }
     } else if (bestHandQuality === 7) {
         let hands = handToCompare;
@@ -224,7 +224,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
             if (maxProperties[1] === 1) {
                 return handToCompare[maxProperties[2][0]];
             } else {
-                return "Tie"
+                return handInformation.length
             }
         }
     } else if (bestHandQuality === 8) {
@@ -238,7 +238,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         if (fourMaxProperties[1] === 1) {
             return handToCompare[fourMaxProperties[2][0]];
         } else {
-            return "Tie"
+            return handInformation.length
         }
     } else {
         let valueOfSF = new Array(handToCompare.length).fill(0);
@@ -251,7 +251,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         if (SFMaxProperties[1] === 1) {
             return handToCompare[SFMaxProperties[2][0]];
         } else {
-            return "Tie"
+            return handInformation.length
         }
     }
 }
