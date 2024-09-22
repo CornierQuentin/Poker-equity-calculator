@@ -1,7 +1,7 @@
-import { createShowdown } from './showdown.js';
-import { evalHands } from './hand_evaluation.js';
-import { convertHand } from './hand_conversion.js';
-import { convertBoard } from './board_conversion.js';
+import { createShowdown } from './showdown/showdown.js';
+import { evalHands } from './hand_evaluation/hand_evaluation.js';
+import { convertHand } from './conversion/hand_conversion.js';
+import { convertBoard } from './conversion/board_conversion.js';
 
 export function equity(players, board) {
 

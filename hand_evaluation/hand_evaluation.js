@@ -1,4 +1,4 @@
-import { maxOfArray } from "./max_of_arrays.js";
+import { maxOfArray } from "../util/max_of_arrays.js";
 import { qualityOfHand } from "./eval_quality_of_hand.js";
 import { compareHands } from "./hand_comparison.js";
 

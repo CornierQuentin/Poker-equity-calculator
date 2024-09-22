@@ -1,4 +1,4 @@
-import { maxOfArray } from "./max_of_arrays.js";
+import { maxOfArray } from "../util/max_of_arrays.js";
 
 export function compareHands(handInformation, handToCompare, bestHandQuality) {
     if (bestHandQuality === 1) {
