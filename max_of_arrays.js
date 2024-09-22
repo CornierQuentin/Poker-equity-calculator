@@ -1,4 +1,8 @@
 export function maxOfArray(array) {
+    /*
+    maxOfArray renvoi :
+        [valeur_max, nombre de fois qu'il y a cette valeur, [liste des index ayant la valeur max]]
+    */
     let max = -Infinity;
     let occurenceMax = 0;
     let indexOfMax = [];

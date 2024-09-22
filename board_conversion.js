@@ -33,6 +33,7 @@ export function convertBoard(board) {
         let stringValue = board[card][0];
         let stringSuit = board[card][1];
 
+        // Conversion de la valeur
         switch (stringValue) {
             case "A":
                 value = 14;
@@ -53,6 +54,7 @@ export function convertBoard(board) {
                 value = parseInt(stringValue);
         }
 
+        // Conversion de la couleur
         switch (stringSuit) {
             case "h":
                 suit = 1;

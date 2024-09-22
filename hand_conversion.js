@@ -36,6 +36,7 @@ export function convertHand(players) {
             let stringValue = players[player][card][0];
             let stringSuit = players[player][card][1];
 
+            // Conversion de la valeur
             switch (stringValue) {
                 case "A":
                     value = 14;
@@ -56,6 +57,7 @@ export function convertHand(players) {
                     value = parseInt(stringValue);
             }
 
+            // Conversion de la couleur
             switch (stringSuit) {
                 case "h":
                     suit = 1;

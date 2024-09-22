@@ -1,4 +1,8 @@
 export function createShowdown(playersHand, board) {
+    /*
+    Cette fonction renvoi un showdown aléatoire en fonction des mains des joueurs et du board actuel
+    Le showdown est sous la forme d'un tableau de carte
+    */
 
     let showdown = new Array(5).fill(0);
 
@@ -6,13 +10,13 @@ export function createShowdown(playersHand, board) {
         showdown[card] = board[card];
     }
 
-    for (let card = board.length; card < 5; card++) {
+    for (let card = board.length; card < 5; card++) { // Pour chaque carte qu'il reste à tiré
         let value = randomInt(2, 14);
         let suit = randomInt(1, 4);
 
         let cardNotInplay = !isCardInShowdown([value, suit], showdown) && !isCardInPlayersHand([value, suit], playersHand);
 
-        while (!cardNotInplay) {
+        while (!cardNotInplay) { // Si la carte à déjà été tiré
             value = randomInt(2, 14);
             suit = randomInt(1, 4);
 
@@ -26,6 +30,9 @@ export function createShowdown(playersHand, board) {
 }
 
 function isCardInShowdown(card, showdown) {
+    /*
+    Fonction qui permet de savoir si une carte spécifique (eg. [13,2]) est présente dans le showdown actuel
+    */
 
     let isIn = false
 
@@ -42,6 +49,9 @@ function isCardInShowdown(card, showdown) {
 } 
 
 function isCardInPlayersHand(card, playersHand) {
+    /*
+    Fonction qui permet de savoir si une carte spécifique (eg. [13,2]) est présente dans les mains des joueurs
+    */
 
     let isIn = false
 
@@ -58,5 +68,8 @@ function isCardInPlayersHand(card, playersHand) {
 } 
 
 function randomInt(min, max) {
+    /*
+    Fonction qui renvoi un entier aléatoire entre min (inclu) et max (exclu)
+    */
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

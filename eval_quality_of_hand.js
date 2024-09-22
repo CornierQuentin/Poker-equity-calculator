@@ -28,6 +28,7 @@ export function qualityOfHand(hand, showdown) {
         Straight Flush -> n: valeur de la meilleur carte
     */
 
+    // Créér un tableau avec les 7 cartes permettant de faire une main
     let cards = hand.concat(showdown);
 
     let valueOccurence = new Array(14).fill(0);
@@ -38,6 +39,10 @@ export function qualityOfHand(hand, showdown) {
         suitOccurence[cards[card][1] - 1]++;
     }
 
+    /*
+    maxOfArray renvoi :
+        [valeur_max, nombre de fois qu'il y a cette valeur, [liste des index ayant la valeur max]]
+    */
     let valueMaxProperties = maxOfArray(valueOccurence);
     let suitMaxProperties = maxOfArray(suitOccurence);
 
@@ -186,6 +191,9 @@ export function qualityOfHand(hand, showdown) {
 }
 
 function isCardInCards(card, cards) {
+    /*
+    Fonction qui permet de savoir si une carte spécifique (eg. [13,2]) est présente dans les 7 cartes
+    */
 
     let isIn = false
 
