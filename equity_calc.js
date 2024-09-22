@@ -5,7 +5,7 @@ import { convertBoard } from './board_conversion.js';
 
 export function equity(players, board) {
 
-    let SIMULATION = 100000;
+    let SIMULATION = 1000000;
 
     let playersHand = convertHand(players);
     let boardCards = convertBoard(board);
@@ -22,7 +22,7 @@ export function equity(players, board) {
     }
 
     for (let player = 0; player < win.length; player++) {
-        winRate[player] = win[player] / SIMULATION;
+        winRate[player] = Math.round(win[player] / SIMULATION * 10000) / 10000;
     }
 
     return winRate
