@@ -1,4 +1,4 @@
-export function createShowdown(playersHand, board) {
+export function createRandomShowdown(playersHand, board) {
     /*
     Cette fonction renvoi un showdown aléatoire en fonction des mains des joueurs et du board actuel
     Le showdown est sous la forme d'un tableau de carte
@@ -28,6 +28,42 @@ export function createShowdown(playersHand, board) {
 
     return showdown;
 }
+
+export function getAvailableCards(playersHand, board) {
+    let availableCards = new Array(13*4 - 2*playersHand.length - board.length);
+    let cardIndex = 0;
+
+    for (let value = 2; value < 15; value++) {
+        for (let suit = 1; suit < 5; suit++) {
+            if (!isCardInShowdown([value, suit], board) && !isCardInPlayersHand([value, suit], playersHand)) {
+                availableCards[cardIndex] = [value, suit];
+                cardIndex++;
+            }
+        }
+    }
+
+    return availableCards;
+}
+
+export function getNextDraw(previousDraw, availableCards) {
+    let numberOfCards = previousDraw.length
+
+    for (let cardIndex = 1; cardIndex <= numberOfCards; cardIndex++) {
+        if (previousDraw[numberOfCards - cardIndex] < availableCards.length - cardIndex) {
+            previousDraw[numberOfCards - cardIndex]++;
+
+            for (let cardsLeft = numberOfCards - cardIndex + 1; cardsLeft < numberOfCards; cardsLeft++) {
+                previousDraw[cardsLeft] = previousDraw[numberOfCards - cardIndex] + cardsLeft - numberOfCards + cardIndex;
+            }
+            return false
+        }
+    }
+
+    return true
+}
+
+/***********************************************************************************************************************************/
+// Fonctions Auxiliaires
 
 function isCardInShowdown(card, showdown) {
     /*
