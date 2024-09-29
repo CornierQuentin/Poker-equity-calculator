@@ -3,6 +3,11 @@ import { qualityOfHand } from "./eval_quality_of_hand.js";
 import { compareHands } from "./hand_comparison.js";
 
 export function evalHands(playersHands, showdown) {
+    /*
+    playersHands: [ [ [12, 2], [9, 1] ], [ [7, 2], [11, 2] ], ... ]
+    showdown: [ [11, 3], [5, 2], [8, 2], [3, 1], [3, 4] ]
+    */
+
     // Qualité de la main (eg. un brelan)
     let handQuality = new Array(playersHands.length);
     // Information relative à la qualité de la main (eg. [9, 12, 7] -> un brelan de 9 avec Q et 7 pour autre carte)

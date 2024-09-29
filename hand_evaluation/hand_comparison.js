@@ -1,6 +1,11 @@
 import { maxOfArray } from "../util/max_of_arrays.js";
 
 export function compareHands(handInformation, handToCompare, bestHandQuality) {
+    /*
+    handInformation: un tableau de tableau correspondant au retour de la fonction qualityOfHand
+    handToCompare: tableau des indeices des joueur à comparés dans handInformation
+    bestHandQuality: un entier qui correspond à la meilleur qualité de main (cf. eval_quality_of_hand.js)
+    */
     if (bestHandQuality === 1) {
         let hands = handToCompare;
         for (let card = 0; card < 5; card++) {

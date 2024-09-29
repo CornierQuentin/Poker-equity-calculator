@@ -5,6 +5,9 @@ export function qualityOfHand(hand, showdown) {
     Cette fonction va renvoyer une valeur numérique qui correspond à la valeur de la meilleure combinaison de carte 
     et un identifiant permettant d'évaluer la combinaison
 
+    hand: [ [12, 2], [9, 1] ]
+    showdown: [ [11, 3], [5, 2], [8, 2], [3, 1], [3, 4] ]
+
     Liste des équivalences :
         High cards -> 1
         Pair -> 2
