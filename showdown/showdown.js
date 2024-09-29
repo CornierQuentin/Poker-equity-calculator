@@ -69,7 +69,7 @@ function isCardInPlayersHand(card, playersHand) {
 
 function randomInt(min, max) {
     /*
-    Fonction qui renvoi un entier aléatoire entre min (inclu) et max (exclu)
+    Fonction qui renvoi un entier aléatoire entre min (inclu) et max (inclu)
     */
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
