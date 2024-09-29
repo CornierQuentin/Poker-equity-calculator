@@ -218,6 +218,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
             }
         }
     } else if (bestHandQuality === 8) {
+        let hands = handToCompare;
         let valueOfFour = new Array(handToCompare.length).fill(0);
         for (let player = 0; player < handToCompare.length; player++) {
             valueOfFour[player] = handInformation[handToCompare[player]][0];
@@ -228,7 +229,25 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
         if (fourMaxProperties[1] === 1) {
             return handToCompare[fourMaxProperties[2][0]];
         } else {
-            return handInformation.length
+            let newHands = new Array(fourMaxProperties[2].length);
+
+            for (let hand = 0; hand < newHands.length; hand++) {
+                newHands[hand] = hands[fourMaxProperties[2][hand]]
+            }
+
+            hands = newHands;
+
+            let valueOfCard = new Array(hands.length).fill(0);
+            for (let player = 0; player < hands.length; player++) {
+                valueOfCard[player] = handInformation[hands[player]][1];
+            }
+
+            let maxProperties = maxOfArray(valueOfCard);
+            if (maxProperties[1] === 1) {
+                return hands[maxProperties[2][0]];
+            } else {
+                return handInformation.length;
+            }
         }
     } else {
         let valueOfSF = new Array(handToCompare.length).fill(0);

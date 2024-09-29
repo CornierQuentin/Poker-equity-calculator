@@ -24,7 +24,7 @@ export function qualityOfHand(hand, showdown) {
         Straight -> n: valeur de la dernière carte
         Flush -> a, b, c, d, e: valeur des plus haute carte
         Full house -> n, m: valeur du brelan puis valeur de la pair
-        Four of kind -> n: valeur du carré
+        Four of kind -> n, x: valeur du carré et valeur de la dernière carte
         Straight Flush -> n: valeur de la meilleur carte
     */
 
@@ -56,11 +56,22 @@ export function qualityOfHand(hand, showdown) {
     let straight = false;
     for (let start = 0; start < 9; start++) {
         let isAStraight = true;
-        for (let card = start; card < start + 5; card++) {
-            if (valueOccurence[card] === 0) {
-                isAStraight = false;
-                break;
+        if (start !== 0) {
+            for (let card = start; card < start + 5; card++) {
+                if (valueOccurence[card] === 0) {
+                    isAStraight = false;
+                    break;
+                }
             }
+        } else if (valueOccurence[13] > 0) {
+            for (let card = start + 1; card < start + 5; card++) {
+                if (valueOccurence[card] === 0) {
+                    isAStraight = false;
+                    break;
+                }
+            }
+        } else {
+            isAStraight = false;
         }
         if (isAStraight) {
             straight = true;
@@ -108,9 +119,18 @@ export function qualityOfHand(hand, showdown) {
                 return [9, [start + 1]];
             }
         }
+        return [9, [5]]
     }
     if (fourOfKind) {
-        return [8, [valueMaxProperties[2][0] + 1]]
+        let four = valueMaxProperties[2][0];
+        let max = 2;
+
+        for (let card = 0; card < cards.length; card++) {
+            if (cards[card][0] > max && cards[card][0] !== four) {
+                max = cards[card][0];
+            } 
+        }
+        return [8, [four, max]]
     } else if (fullHouse) {
         let threeOfKindValue = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let pairValue = 0;
@@ -145,6 +165,7 @@ export function qualityOfHand(hand, showdown) {
                 return [5, [start + 1]];
             }
         }
+        return [5, [5]]
     } else if (threeOfKind) {
         let threeOfKindValue = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let max = [2, 2];
