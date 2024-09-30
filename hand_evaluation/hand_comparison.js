@@ -6,7 +6,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
     handToCompare: tableau des indeices des joueur à comparés dans handInformation
     bestHandQuality: un entier qui correspond à la meilleur qualité de main (cf. eval_quality_of_hand.js)
     */
-    if (bestHandQuality === 1) {
+    if (bestHandQuality === 1 || bestHandQuality === 6) {
         let hands = handToCompare;
         for (let card = 0; card < 5; card++) {
             let valueOfCard = new Array(hands.length).fill(0);
@@ -174,19 +174,6 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
 
         if (straightMaxProperties[1] === 1) {
             return handToCompare[straightMaxProperties[2][0]];
-        } else {
-            return handInformation.length
-        }
-    } else if (bestHandQuality === 6) {
-        let valueOfFlush = new Array(handToCompare.length).fill(0);
-        for (let player = 0; player < handToCompare.length; player++) {
-            valueOfFlush[player] = handInformation[handToCompare[player]][0];
-        }
-
-        let flushMaxProperties = maxOfArray(valueOfFlush);
-
-        if (flushMaxProperties[1] === 1) {
-            return handToCompare[flushMaxProperties[2][0]];
         } else {
             return handInformation.length
         }

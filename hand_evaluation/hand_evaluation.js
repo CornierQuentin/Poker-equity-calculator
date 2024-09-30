@@ -29,6 +29,7 @@ export function evalHands(playersHands, showdown) {
     if (maxProperties[1] === 1) { // Si une seule personne à la meilleure qualité
         return maxProperties[2][0];
     } else { // Sinon on compare les informations sur la main
+
         let bestHandQuality = maxProperties[0];
 
         return compareHands(handInformation, maxProperties[2], bestHandQuality);

@@ -34,12 +34,12 @@ export function qualityOfHand(hand, showdown) {
     // Créér un tableau avec les 7 cartes permettant de faire une main
     let cards = hand.concat(showdown);
 
-    let valueOccurence = new Array(14).fill(0);
-    let suitOccurence = new Array(4).fill(0);
+    let valueOccurence = new Array(15).fill(0);
+    let suitOccurence = new Array(5).fill(0);
 
     for (let card = 0; card < cards.length; card++) {
-        valueOccurence[cards[card][0] - 1]++;
-        suitOccurence[cards[card][1] - 1]++;
+        valueOccurence[cards[card][0]]++;
+        suitOccurence[cards[card][1]]++;
     }
 
     /*
@@ -57,16 +57,16 @@ export function qualityOfHand(hand, showdown) {
     let threeOfKind = valueMaxProperties[0] === 3;
 
     let straight = false;
-    for (let start = 0; start < 9; start++) {
+    for (let start = 1; start < 11; start++) {
         let isAStraight = true;
-        if (start !== 0) {
+        if (start !== 1) {
             for (let card = start; card < start + 5; card++) {
                 if (valueOccurence[card] === 0) {
                     isAStraight = false;
                     break;
                 }
             }
-        } else if (valueOccurence[13] > 0) {
+        } else if (valueOccurence[14] > 0) {
             for (let card = start + 1; card < start + 5; card++) {
                 if (valueOccurence[card] === 0) {
                     isAStraight = false;
@@ -84,14 +84,14 @@ export function qualityOfHand(hand, showdown) {
 
     let flush = suitMaxProperties[0] >= 5;
 
-    let fullHouse = valueMaxProperties[0] >= 3;
+    let fullHouse = valueMaxProperties[0] === 3;
     if (fullHouse) {
-        let fullHouseValue = valueMaxProperties[2][valueMaxProperties[1] - 1] + 1;
-        let fullHouseOccurence = new Array(14).fill(0);
+        let fullHouseValue = valueMaxProperties[2][0];
+        let fullHouseOccurence = new Array(15).fill(0);
 
         for (let card = 0; card < cards.length; card++) {
             if (cards[card][0] !== fullHouseValue) {
-                fullHouseOccurence[cards[card][0] - 1]++;
+                fullHouseOccurence[cards[card][0]]++;
             }
         }
 
@@ -107,22 +107,34 @@ export function qualityOfHand(hand, showdown) {
     /* On va renvoyer la meilleur main avec ses information */
 
     if (straightFlush) {
-        let suit = suitMaxProperties[2][0] + 1;
+        let suit = suitMaxProperties[2][0];
 
-        for (let start = 13; start > 4; start--) {
+        for (let start = 14; start > 4; start--) {
             let isAStraight = true;
             for (let card = start; card > start - 5; card--) {
-                if (valueOccurence[card] === 0 || !isCardInCards([card + 1, suit], cards)) {
+                if (valueOccurence[card] === 0 || !isCardInCards([card, suit], cards)) {
                     isAStraight = false;
                     break;
                 }
             }
             if (isAStraight === true) {
                 straight = true;
-                return [9, [start + 1]];
+                return [9, [start]];
             }
         }
-        return [9, [5]]
+        if (valueOccurence[14] > 0 && isCardInCards([14, suit], cards)) {
+            let isAStraight = true;
+            for (let card = 5; card > 1; card--) {
+                if (valueOccurence[card] === 0 || !isCardInCards([card, suit], cards)) {
+                    isAStraight = false;
+                    break;
+                }
+            }
+            if (isAStraight === true) {
+                straight = true;
+                return [9, [5]];
+            }
+        }
     }
     if (fourOfKind) {
         let four = valueMaxProperties[2][0];
@@ -137,25 +149,25 @@ export function qualityOfHand(hand, showdown) {
     } else if (fullHouse) {
         let threeOfKindValue = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let pairValue = 0;
-        for (let value = 0; value < 14; value++) {
+        for (let value = 2; value < 15; value++) {
             if (valueOccurence[value] >= 2 && value !== threeOfKindValue) {
                 pairValue = value;
             }
         }
-        return [7, [threeOfKindValue + 1, pairValue + 1]]
+        return [7, [threeOfKindValue, pairValue]]
     } else if (flush) {
-        let suit = suitMaxProperties[2][0] + 1;
+        let suit = suitMaxProperties[2][0];
 
-        let max = 2;
+        let max = [2, 2, 2, 2, 2];
 
         for (let card = 0; card < cards.length; card++) {
-            if (cards[card][0] > max && cards[card][1] === suit) {
-                max = cards[card][0];
+            if (cards[card][0] > max[0] && cards[card][1] === suit) {
+                max = [cards[card][0], max[0], max[1], max[2], max[3]];
             } 
         }
-        return [6, [max]];
+        return [6, [max[0], max[1], max[2], max[3], max[4]]];
     } else if (straight) {
-        for (let start = 13; start > 4; start--) {
+        for (let start = 14; start > 4; start--) {
             let isAStraight = true;
             for (let card = start; card > start - 5; card--) {
                 if (valueOccurence[card] === 0) {
@@ -165,7 +177,7 @@ export function qualityOfHand(hand, showdown) {
             }
             if (isAStraight === true) {
                 straight = true;
-                return [5, [start + 1]];
+                return [5, [start]];
             }
         }
         return [5, [5]]
@@ -173,44 +185,44 @@ export function qualityOfHand(hand, showdown) {
         let threeOfKindValue = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let max = [2, 2];
 
-        for (let card = 0; card < 14; card++) {
+        for (let card = 2; card < 15; card++) {
             if (card !== threeOfKindValue && valueOccurence[card] > 0) {
                 max = [card, max[0]];
             }
         }
 
-        return [4, [threeOfKindValue + 1, max[0] + 1, max[1] + 1]];
+        return [4, [threeOfKindValue, max[0], max[1]]];
     } else if (twoPair) {
         let pair_one = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let pair_two = valueMaxProperties[2][valueMaxProperties[2].length - 2];
         let max = 2;
-        for (let card = 0; card < 14; card++) {
+        for (let card = 0; card < 15; card++) {
             if (valueOccurence[card] > 0 && card !== pair_one && card !== pair_two) {
                 max = card;
             }
         }
 
-        return [3, [pair_one + 1, pair_two + 1, max + 1]];
+        return [3, [pair_one, pair_two, max]];
     } else if (pair) {
         let pairValue = valueMaxProperties[2][valueMaxProperties[2].length - 1];
         let max = [2, 2, 2];
 
-        for (let card = 0; card < 14; card++) {
+        for (let card = 2; card < 15; card++) {
             if (card !== pairValue && valueOccurence[card] > 0) {
-                max = [card + 1, max[0], max[1]];
+                max = [card, max[0], max[1]];
             }
         }
 
-        return [2, [pairValue, max[0] + 1, max[1] + 1, max[2] + 1]];
+        return [2, [pairValue, max[0], max[1], max[2]]];
     } else {
         let max = [2, 2, 2, 2, 2];
-        for (let card = 0; card < 14; card++) {
+        for (let card = 0; card < 15; card++) {
             if (valueOccurence[card] > 0) {
                 max = [card, max[0], max[1], max[2], max[3]];
             }
         }
 
-        return [1, [max[0] + 1, max[1] + 1, max[2] + 1, max[3] + 1, max[4] + 1]];
+        return [1, [max[0], max[1], max[2], max[3], max[4]]];
     }
 }
 

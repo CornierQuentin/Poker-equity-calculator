@@ -46,7 +46,7 @@ export function getAvailableCards(playersHand, board) {
 }
 
 export function getNextDraw(previousDraw, availableCards) {
-    let numberOfCards = previousDraw.length
+    let numberOfCards = previousDraw.length;
 
     for (let cardIndex = 1; cardIndex <= numberOfCards; cardIndex++) {
         if (previousDraw[numberOfCards - cardIndex] < availableCards.length - cardIndex) {
@@ -55,11 +55,21 @@ export function getNextDraw(previousDraw, availableCards) {
             for (let cardsLeft = numberOfCards - cardIndex + 1; cardsLeft < numberOfCards; cardsLeft++) {
                 previousDraw[cardsLeft] = previousDraw[numberOfCards - cardIndex] + cardsLeft - numberOfCards + cardIndex;
             }
-            return false
+            return false;
         }
     }
 
-    return true
+    return true;
+}
+
+export function concatenateCardToBoard(availableCards, cardIndex, board) {
+    let showdown = board.slice();
+    
+    for (let index = 0; index < cardIndex.length; index++) {
+        showdown.push(availableCards[cardIndex[index]]);
+    }
+
+    return showdown;
 }
 
 /***********************************************************************************************************************************/
