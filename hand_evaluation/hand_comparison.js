@@ -97,7 +97,7 @@ export function compareHands(handInformation, handToCompare, bestHandQuality) {
 
             let pairTwoMaxProperties = maxOfArray(valueOfPairTwo);
 
-            if (pairOneMaxProperties[1] === 1) {
+            if (pairTwoMaxProperties[1] === 1) {
                 return handToCompare[pairTwoMaxProperties[2][0]];
             } else {
                 let newHands = new Array(pairTwoMaxProperties[2].length);
